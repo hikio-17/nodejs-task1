@@ -7,8 +7,6 @@ const {
   getAddress,
 } = require('./module/biodata');
 
-const PORT = 5000;
-
 const server = http.createServer((req, res) => {
   const path = req.url;
 
@@ -33,11 +31,20 @@ const server = http.createServer((req, res) => {
   }
 });
 
+const users = {
+  name: 'Fajri Muhammad Tio',
+  tmpLahir: 'Lawang Agung',
+  tglLahir: '6 Januari 2000',
+  alamat: 'Jl.Depati Parbo Kota Sungai Penuh',
+};
+
 // view in console
-console.log(`Nama: ${getName('Fajri Muhammad Tio')}`);
-console.log(`Tempat Lahir: ${getPlaceBirth('Lawang Agung')}`);
-console.log(`Tanggal Lahir: ${getBirth('6 Januari 2000')}`);
-console.log(`Alamat: ${getAddress('Jl.Depati Parbo Kota Sungai Penuh')}`);
+console.log(`Nama: ${getName(users.name)}`);
+console.log(`Tempat Lahir: ${getPlaceBirth(users.tmpLahir)}`);
+console.log(`Tanggal Lahir: ${getBirth(users.tglLahir)}`);
+console.log(`Alamat: ${getAddress(users.alamat)}`);
+
+const PORT = 5000;
 
 server.listen(PORT, () => {
   console.log(`Server running at http://127.0.0.1:${PORT}`);
