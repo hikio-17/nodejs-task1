@@ -7,9 +7,16 @@ const {
   getAddress,
 } = require('./module/biodata');
 
+// Create object user
+const user = {
+  name: 'Fajri Muhammad Tio',
+  tmpLahir: 'Lawang Agung',
+  tglLahir: '6 Januari 2000',
+  alamat: 'Jl.Depati Parbo Kota Sungai Penuh',
+};
+
 const server = http.createServer((req, res) => {
   const path = req.url;
-
   // view in browser
   switch (path) {
     case '/':
@@ -19,11 +26,13 @@ const server = http.createServer((req, res) => {
     case '/biodata':
       res.writeHead(200, { 'Content-Type': 'text/html ' });
       res.end(`
-            <h5>Nama: ${getName('Fajri Muhammad Tio')}</h5>
-            <h5>Tempat Lahir: ${getPlaceBirth('Lawang Agung')}</h5>
-            <h5>Tanggal Lahir: ${getBirth('6 Januari 2000')}</h5>
-            <h5>Alamat: ${getAddress('Jl.Depati Parbo Kota Sungai Penuh')}</h5>
-         `);
+      <ul>
+        <li><b>Nama:</b> ${getName(user.name)}</li>
+          <li><b>Tempat Lahir:</b> ${getPlaceBirth(user.tmpLahir)}</li>
+          <li><b>Tanggal Lahir:</b> ${getBirth(user.tglLahir)}</li>
+          <li><b>Alamat:</b> ${getAddress(user.alamat)}</li>
+      </ul>      
+      `);
       break;
     default:
       res.writeHead(404, { 'Content-Type': 'text/html' });
@@ -31,19 +40,13 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const users = {
-  name: 'Fajri Muhammad Tio',
-  tmpLahir: 'Lawang Agung',
-  tglLahir: '6 Januari 2000',
-  alamat: 'Jl.Depati Parbo Kota Sungai Penuh',
-};
-
 // view in console
-console.log(`Nama: ${getName(users.name)}`);
-console.log(`Tempat Lahir: ${getPlaceBirth(users.tmpLahir)}`);
-console.log(`Tanggal Lahir: ${getBirth(users.tglLahir)}`);
-console.log(`Alamat: ${getAddress(users.alamat)}`);
+console.log(`Nama: ${getName(user.name)}`);
+console.log(`Tempat Lahir: ${getPlaceBirth(user.tmpLahir)}`);
+console.log(`Tanggal Lahir: ${getBirth(user.tglLahir)}`);
+console.log(`Alamat: ${getAddress(user.alamat)}`);
 
+// SETUP SERVER
 const PORT = 5000;
 
 server.listen(PORT, () => {
